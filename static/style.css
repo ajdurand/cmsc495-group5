@@ -1,0 +1,35 @@
+main {
+    border: 2px solid gray;
+    border-radius: 10px;
+    margin-top: 5em;
+}
+
+#header {
+    border-bottom: 2px solid gray;
+    margin: 1em;
+}
+
+#body {
+    margin: 1em;
+}
+
+#new-user {
+    display: none;
+}
+#new-user:target {
+    display: block;
+}
+#new-user:target + div {
+    display: none;
+}
+
+.exercise {
+    display: none;
+}
+.exercise:target {
+    display: block;
+}
+
+.divider {
+    margin-top: 2em;
+}

@@ -1,0 +1,68 @@
+{% extends "layout.html" -%}
+
+{% block header -%}
+<h1 class="text-center">Main Menu</h1>
+<h5 class="text-center">Welcome {{ user.username }}. Click <a href="/logout">here</a> to logout.</h5>
+{% endblock -%}
+
+{% block body -%}
+<div class="divider text-center" data-content="My Stats" style="margin-top: 4em"></div>
+<table class="table table-condensed">
+    <thead>
+        <tr>
+            <th>Date</th><th>Exercise</th><th>Calories Burned</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td>2021-07-10</td><td>Running</td><td>241</td>
+        </tr>
+    </tbody>
+</table>
+<div class="divider text-center" data-content="Exercises" style="margin-top: 4em"></div>
+<div class="container">
+    <div class="chip">
+        <a href="#walking">Walking</a>
+    </div>
+    <div class="chip">
+        <a href="#running">Running</a>
+    </div>
+    <div class="chip">
+        <a href="#sprints">Sprints</a>
+    </div>
+    <div class="chip">
+        <a href="#pushups">Pushups</a>
+    </div>
+    <div class="chip">
+        <a href="#crunches">Crunches</a>
+    </div>
+    <div class="chip">
+        <a href="#pullups">Pullups</a>
+    </div>
+    <div class="chip">
+        <a href="#planks">Planks</a>
+    </div>
+</div>
+<form name="exercise" method="POST" action="/add_exercise"></form>
+<div id="walking" class="exercise">
+    {% include "snippets/exercise_nyi.html" -%}
+</div>
+<div id="running" class="exercise">
+    {% include "snippets/exercise_nyi.html" -%}
+</div>
+<div id="sprints" class="exercise">
+    {% include "snippets/exercise_nyi.html" -%}
+</div>
+<div id="pushups" class="exercise">
+    {% include "snippets/exercise_nyi.html" -%}
+</div>
+<div id="crunches" class="exercise">
+    {% include "snippets/exercise_nyi.html" -%}
+</div>
+<div id="pullups" class="exercise">
+    {% include "snippets/exercise_nyi.html" -%}
+</div>
+<div id="planks" class="exercise">
+    {% include "snippets/exercise_nyi.html" -%}
+</div>
+{% endblock -%}

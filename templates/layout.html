@@ -1,0 +1,21 @@
+<html>
+    <head>
+        <link rel="stylesheet" href="https://unpkg.com/spectre.css/dist/spectre.min.css">
+        <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+        {% block head -%}
+        {% endblock -%}
+        <title>{{ title or 'Unnamed Page' }} - Fitness App</title>
+    </head>
+    <body>
+        <main class="container grid-lg">
+            <section id="header">
+                {% block header -%}
+                {% endblock -%}
+            </section>
+            <section id="body">
+                {% block body -%}
+                {% endblock -%}
+            </section>
+        </main>
+    </body>
+</html>

@@ -1,0 +1,80 @@
+{% extends "layout.html" %}
+
+{% block header -%}
+<h1 class="text-center">Welcome to the Fitness App</h1>
+{% endblock -%}
+
+{% block body -%}
+<form id="new-user" name="login-form" class="form-horizontal" action="/new_user" method="POST">
+    <h4>Create New User</h4>
+    <div class="form-group">
+        <div class="col-3 col-sm-12">
+            <label class="form-label" for="username">User Name*</label>
+        </div>
+        <div class="col-9 col-sm-12">
+            <input class="form-input" type="text" name="username" placeholder="eg. Bob123" required>
+        </div>
+    </div>
+    <div class="form-group">
+        <div class="col-3 col-sm-12">
+            <label class="form-label" for="gender">Gender</label>
+        </div>
+        <div class="col-9 col-sm-12">
+            <label class="form-radio">
+                <input type="radio" name="gender" value="male">
+                <i class="form-icon"></i>
+                Male
+            </label>
+            <label class="form-radio">
+                <input type="radio" name="gender" value="female">
+                <i class="form-icon"></i>
+                Female
+            </label>
+            <label class="form-radio">
+                <input type="radio" name="gender" value="other">
+                <i class="form-icon"></i>
+                Other
+            </label>
+        </div>
+    </div>
+    <div class="form-group">
+        <div class="col-3 col-sm-12">
+            <label class="form-label" for="height">Height</label>
+        </div>
+        <div class="col-9 col-sm-12">
+            <input type="number" name="height" min="0" placeholder="in inches">
+        </div>
+    </div>
+    <div class="form-group">
+        <div class="col-3 col-sm-12">
+            <label class="form-label" for="weight">Weight</label>
+        </div>
+        <div class="col-9 col-sm-12">
+            <input type="number" name="weight" min="0" placeholder="in pounds">
+        </div>
+    </div>
+    <div class="form-group columns">
+        <div class="column col-3 col-mx-auto">
+            <input class="btn btn-success" type="submit" value="Submit" style="width: 100%">
+        </div>
+        <div class="column col-3 col-mx-auto">
+            <a href="javascript:history.go(-1)" class="btn" style="width: 100%">Back</a>
+        </div>
+    </div>
+</form>
+<div>
+    <h4>To get started, select a user or <a href="#new-user">create a new one</a>:</h4>
+    <div class="columns">
+        <div class="column col-mx-auto">
+            <form name="existing-form" action="/existing_user" method="POST">
+                <select name="existinguser" class="form-select" oninput="this.form.submit()">
+                    <option selected disabled>Select a User</option>
+                    {% for user in usernames -%}
+                    <option value="{{ user }}">{{ user }}</option>
+                    {% endfor -%}
+                </select>
+            </form>
+        </div>
+    </div>
+</div>
+{% endblock -%}
