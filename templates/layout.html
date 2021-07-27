@@ -1,7 +1,9 @@
 <html>
     <head>
         <link rel="stylesheet" href="https://unpkg.com/spectre.css/dist/spectre.min.css">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css">
         <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
         {% block head -%}
         {% endblock -%}
         <title>{{ title or 'Unnamed Page' }} - Fitness App</title>

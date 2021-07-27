@@ -1,0 +1,35 @@
+<h4 class="text-center">Walking</h4>
+<form class="form-horizontal" action="/submit_exercise" method="POST">
+    {# 
+        Each exercise has a duration and a count; the total calories burned will be
+        the count * duration * burnAmount * weight. In the case of walking or running,
+        they will have 1 count but the user enters the duration. For pushups and crunches,
+        the user enters count and we assume the duration (one pushup takes about a second)
+
+        The duration_mult field is to multiply the supplied duration so we end up width
+        seconds as the final value. We'll measure walking in minutes, then set the
+        duration_mult to 60.
+    -#}
+    <input type="hidden" name="exercise" value="walking">
+    <input type="hidden" name="count" value="1">
+    <div class="form-group">
+        <div class="col-3 col-sm-12">
+            <label class="form-label" for="duration">Duration</label>
+        </div>
+        <div class="col-9 col-sm-12">
+            <input type="number" name="duration" class="form-input" placeholder="minutes" required>
+            <input type="hidden" name="duration_mult" value="60">
+        </div>
+    </div>
+    <div class="columns">
+        <div class="column col-2 col-mx-auto">
+            <input type="submit" class="btn btn-success" value="Submit">
+        </div>
+        <div class="column col-2 col-mx-auto">
+            <input type="reset" class="btn" value="Reset">
+        </div>
+        <div class="column col-2 col-mx-auto">
+            <a href="#" class="btn" style="width: 100%">Back</a>
+        </div>
+    </div>
+</form>

@@ -21,7 +21,7 @@ app = flask.Flask("Fitness App")
 def index():
     """ Our landing page; this is where users first land when they open our app """
     # nothing to do other than show the page; providing a test user by default
-    # in phase2, we will populate the username list with users from our data structure
+    # in phase  2 or 3, we will populate the username list with users from our data structure
     return render_template("index.html", title="Welcome", usernames=['testuser123'])
 
 
@@ -59,9 +59,7 @@ def menu():
     # create a dummy user since our user object hasn't been coded yet; phase2
     user = {
         "username": username,
-        "height": 73,
         "weight": 190,
-        "gender": 'other',
         "history": [], # a list with every exercise they've done; loaded from data structure
     }
 
