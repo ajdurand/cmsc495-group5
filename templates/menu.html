@@ -14,9 +14,13 @@
         </tr>
     </thead>
     <tbody>
+    {% for exercise in user.exercise_activity() -%}
         <tr>
-            <td>2021-07-10</td><td>Running</td><td>241</td>
+            <td>{{ exercise[0] }}</td>
+            <td>{{ exercise[1] }}</td>
+            <td>{{ exercise[2] | int }}</td>
         </tr>
+    {% endfor -%}
     </tbody>
 </table>
 <div class="divider text-center" data-content="Exercises" style="margin-top: 4em"></div>
@@ -51,18 +55,18 @@
     {% include "snippets/exercise_running.html" -%}
 </div>
 <div id="sprints" class="exercise">
-    {% include "snippets/exercise_nyi.html" -%}
+    {% include "snippets/exercise_sprints.html" -%}
 </div>
 <div id="pushups" class="exercise">
-    {% include "snippets/exercise_nyi.html" -%}
+    {% include "snippets/exercise_pushups.html" -%}
 </div>
 <div id="crunches" class="exercise">
-    {% include "snippets/exercise_nyi.html" -%}
+    {% include "snippets/exercise_crunches.html" -%}
 </div>
 <div id="pullups" class="exercise">
     {% include "snippets/exercise_nyi.html" -%}
 </div>
 <div id="planks" class="exercise">
-    {% include "snippets/exercise_nyi.html" -%}
+    {% include "snippets/exercise_planks.html" -%}
 </div>
 {% endblock -%}
