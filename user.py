@@ -7,7 +7,10 @@ Changelog:
 20210727 - Creation
 """
 
+import json
 import datetime as dt
+
+json_file_name = "userdat.json"
 
 class User:
     users = []
@@ -26,7 +29,7 @@ class User:
         now = dt.date.today().isoformat()
         event = [now, exercise, kcals]
         self.activities.append(event)
-        # store data to a file or database in phase 3 or 4
+        self.__class__.save_users()
 
 
     def exercise_activity(self):
@@ -62,3 +65,35 @@ class User:
     def new_user(cls, username, weight, activities):
         # somantics
         return User(username, weight, activities)
+
+
+    @classmethod
+    def save_users(cls):
+        """ Save all current users and their activities to a JSON file """
+        data = []
+        for user in cls.users:
+            data.append({
+                "username": user.username,
+                "weight": user.weight,
+                "activities": user.activities
+            })
+
+        with open(json_file_name, 'w') as file_output:
+            file_output.write(json.dumps(data, indent=4))
+
+
+    @classmethod
+    def load_users(cls):
+        """ Load users and their activities from a JSON file """
+        json_data = None
+        try:
+            with open(json_file_name, 'r') as file_input:
+                json_data = json.loads(file_input.read())
+        except:
+            # no file exists
+            json_data = []
+
+        for user in json_data:
+            cls.new_user(user['username'],
+                         user['weight'],
+                         user['activities'])

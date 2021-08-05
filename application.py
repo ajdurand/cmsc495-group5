@@ -20,18 +20,20 @@ from user import User
 app = flask.Flask("Fitness App")
 
 # exercises and their kcal value per second per kilogram (mostly)
+# calories burned is primarly an aerobic event; muscle building things like crunches, planks, pushups, etc.
+# burn very little calories
 exercises = {
-    'sprints': 0.0025, # guessing based on really fast walking and generally being very draining
+    'sprints': 0.085, # guessing based on really fast walking and generally being very draining
     'running': 9.7,
-    'walking': 0.000875,
+    'walking': 0.00875,
     'crunches': 0.0015,
     'planks': 0.000735,
     'pushups': 0.0011,
-    'pullups': 0 # need to find a value
+    'pullups': 0.0011 # approximately equal to pushups; for most people 1 pullup is roughly 1 calorie
     }
 
-# create a dummy user on startup since we don't have a database or file yet
-User.new_user('test123', 100, [])
+# load our users from the database file
+User.load_users()
 
 
 # the app.route decorators let us create a URL, or route, that when navigated to
@@ -47,8 +49,25 @@ def index():
 @app.route('/new_user', methods=['POST'])
 def new_user():
     """ Create a new user using the form data that was submitted """
-    # NYI
-    return redirect(url_for('under_construction'))
+    form = request.form
+    username = form.get('username', None)
+    if not username: return render_error('Must supply a username!')
+
+    for user in User.userlist():
+        if username == user.username:
+            return render_error('That username is already in use!')
+
+    weight = form.get('weight', 0, type=int)
+    if weight is None: return render_error("Must provide a weight!")
+    if weight <= 0: return render_error("Weight must be a positive value!")
+
+    User.new_user(username, weight, [])
+    User.save_users()
+
+    response = make_response(redirect(url_for('menu')))
+    response.set_cookie('username', username)
+
+    return redirect(url_for('menu'))
 
 
 @app.route('/existing_user', methods=['POST'])
@@ -131,19 +150,25 @@ def under_construction():
     return render_template("under_construction.html", title="Under Construction")
 
 
+def render_error(message):
+    """ Render a simple error page with a back button """
+    return render_template("error.html", message=message), 500
+
+
 def get_user():
     """ Attempt to retrieve user information for the calling route """
     username = request.cookies.get('username', '')
     if not username:
-        # redirect to main page since they haven't logged in
-        return None, redirect(url_for('index'))
+        # they haven't logged in
+        return None, render_error('You are not logged in!')
 
     user = User.get_user(username)
     if not user:
         # no such user exists
-        return None, redirect(url_for('index'))
+        return None, render_error('The username you attempted to use does not exist!')
 
     return user, None
+
 
 if __name__ == "__main__":
     # run a simple development server to display the our app
