@@ -15,12 +15,18 @@
                 {% endblock -%}
             </section>
             <style>
-			img {
-			  display: block;
-			  margin-left: auto;
-			  margin-right: auto;
-			}
-			</style>
+		img {
+		display: block;
+		margin-left: auto;
+		margin-right: auto;
+		}
+		body  
+		{  
+		background-image:url("/static/background.jpg");  
+		background-repeat: no-repeat;
+		background-size: cover;
+		}  
+		</style>
             <section id="body">
                 {% block body -%}
                 {% endblock -%}
