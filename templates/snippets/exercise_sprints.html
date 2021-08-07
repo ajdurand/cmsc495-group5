@@ -2,14 +2,10 @@
 <img src="static/sprinting.jpg" alt="Sprinting!"  style="width:50%;">
 <form class="form-horizontal" action="/submit_exercise" method="POST">
     {# 
-        Each exercise has a duration and a count; the total calories burned will be
-        the count * duration * burnAmount * weight. In the case of walking or running,
-        they will have 1 count but the user enters the duration. For pushups and crunches,
-        the user enters count and we assume the duration (one pushup takes about a second)
-
-        The duration_mult field is to multiply the supplied duration so we end up width
-        seconds as the final value. We'll measure walking in minutes, then set the
-        duration_mult to 60.
+        The sprints exercise has a duration and a count; 
+    the total calories burned will be calculated by, the count * duration * burnAmount * weight. 
+    In the case of sprints, they will have 1 count but the user enters the duration. The duration_mult field is to 
+    multiply the supplied duration so we end up with seconds as the final value. 
     -#}
     <input type="hidden" name="exercise" value="sprints">
     <div class="form-group">
