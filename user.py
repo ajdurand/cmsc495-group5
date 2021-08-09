@@ -36,6 +36,11 @@ class User:
         return self.activities
 
 
+    def change_weight(self, weight):
+        self.weight = weight
+        self.__class__.save_users()
+
+
     @classmethod
     def get_user(cls, username):
         """ Search our user list for the specified user """

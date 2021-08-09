@@ -84,6 +84,35 @@ def existing_user():
     return response
 
 
+@app.route('/profile', methods=['POST', 'GET'])
+def profile():
+    """ Allow the user to modify their weight """
+    user, redir = get_user()
+    if not user: return redir
+
+    total_calories = 0
+    for activity in user.exercise_activity():
+        total_calories += activity[2] # add kcals from all exercises
+
+    total_activities = len(user.exercise_activity())
+
+    message = None
+    if request.method == 'POST': # they haven't edited anything yet
+        form = request.form
+        weight = form.get('weight', None, int)
+        if weight is None or weight <= 0:
+            return render_error('Must enter a valid weight!')
+
+        change = user.weight - weight
+        if change > 0: # user lost weight
+            message = f"Congratulations on losing {change} kg! Keep it up."
+        else: # no change or gained weight
+            message = "Keep working on it, you'll see benefit eventually!"
+        user.change_weight(weight)
+
+    return render_template('profile.html', title="User Profile", user=user, kcals=int(total_calories), activities=total_activities, message=message)
+
+
 @app.route('/menu')
 def menu():
     """ The main menu our user sees after they've logged in """
@@ -143,6 +172,11 @@ def logout():
 
     return response
 
+
+@app.route('/about')
+def about():
+    """ Show the about page of our group and app """
+    return render_template('about.html', title="About Us")
 
 @app.route('/under_construction')
 def under_construction():

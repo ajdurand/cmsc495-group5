@@ -14,25 +14,14 @@
                 {% block header -%}
                 {% endblock -%}
             </section>
-            <style>
-		img {
-		display: block;
-		margin-left: auto;
-		margin-right: auto;
-		}
-		body  
-		{  
-		background-image:url("/static/background.jpg");  
-		background-repeat: no-repeat;
-		background-size: cover;
-		}  
-		</style>
             <section id="body">
                 {% block body -%}
                 {% endblock -%}
             </section>
+            <section id="footer">
+                <a href="/" class="btn">Home</a>
+                <a href="/about" class="btn">About Us</a>
+            </section>
         </main>
-	<a href="/" style="color:white">Home</a>
-	<a href="/about.html" style="color:white">About Us</a>
     </body>
 </html>

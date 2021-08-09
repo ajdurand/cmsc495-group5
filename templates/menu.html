@@ -2,7 +2,7 @@
 
 {% block header -%}
 <h1 class="text-center">Main Menu</h1>
-<h5 class="text-center">Welcome {{ user.username }}. Click <a href="/logout">here</a> to logout.</h5>
+<h5 class="text-center">Welcome {{ user.username }}. Click <a href="/logout">here to logout</a>. Click <a href="/profile">here to change your profile</a>.</h5>
 {% endblock -%}
 
 {% block body -%}
@@ -64,7 +64,7 @@
     {% include "snippets/exercise_crunches.html" -%}
 </div>
 <div id="pullups" class="exercise">
-    {% include "snippets/exercise_nyi.html" -%}
+    {% include "snippets/exercise_pullups.html" -%}
 </div>
 <div id="planks" class="exercise">
     {% include "snippets/exercise_planks.html" -%}

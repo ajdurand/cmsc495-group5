@@ -1,0 +1,31 @@
+{%extends "layout.html"%}
+
+{% block header -%}
+<h1 class="text-center">User Profile</h1>
+<h5 class="text-center">Profile for {{ user.username }}. Click <a href="/logout">here to logout</a>. Click <a href="/menu">here to return to the menu</a>.</h5>
+{% endblock -%}
+
+
+{% block body -%}
+{% if message -%}
+    <h5 class="text-center">{{ message }}</h5>
+{% endif -%}
+<br>
+<p>You've burned a total of {{ kcals }} kcals over {{ activities }} exercises since you started using this app.</p>
+<div class="divider text-center" data-content="Weight" style="margin-top: 4em"></div>
+<form class="form-horizontal" action="/profile" method="POST">
+    <div class="form-group">
+        <div class="col-3 col-sm-12">
+            <label class="form-label" for="weight">Weight</label>
+        </div>
+        <div class="col-9 col-sm-12">
+            <input type="number" name="weight" class="form-input" placeholder="kg" value="{{ user.weight }}" required>
+        </div>
+    </div>
+    <div class="columns">
+        <div class="column col-2 col-mx-auto">
+            <input type="submit" class="btn btn-success" value="Update">
+        </div>
+    </div>
+</form>
+{% endblock -%}
